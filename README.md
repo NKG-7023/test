@@ -2,6 +2,7 @@
 
 ## 編集します
 こんにちは  
+<<<<<<< Updated upstream
 
 -------
 
@@ -14,3 +15,15 @@ nakagawa
  -------
 
  
+=======
+
+ -----------  
+ fe  
+nakagawa  
+# ABC  
+## abc  
+
+1. a  
+| abc | document |  
+| --- | -------- |
+>>>>>>> Stashed changes
