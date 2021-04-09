@@ -17,7 +17,7 @@ class Vec2 {
 	get length() {
 		return Math.sqrt(x*x+y*y);
 	}
-
+	
 	add(v) {
 		this.x += v.x;
 		this.y += v.y;
