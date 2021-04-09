@@ -166,6 +166,7 @@ window.addEventListener('keydown', function(event) {
 		return;
 	}
 
+
 	switch(event.code) {
 		case "KeyS":
 		case "ArrowDown":
@@ -194,6 +195,7 @@ window.addEventListener('keydown', function(event) {
 
 	event.preventDefault();
 }, true);
+
 
 window.addEventListener("gamepadconnected", function(e) { gamepadHandler(e, true); }, false);
 window.addEventListener("gamepaddisconnected", function(e) { gamepadHandler(e, false); }, false);
