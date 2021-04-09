@@ -18,6 +18,8 @@
 - 	mainブランチへの追加は、**Create Pull Requestまで**を可能とし、  
 	Merge(Merge Pull Request)は**相手が承認するまで待つ**。  
 	ちなみに、Pull Requestを建てると、相手にメールが行く。
+-	commitのコメントはなくても良いが、  
+	Pull Requestはコメント(description)を必須とする。
 
 # スケジュール
 ## 全体
