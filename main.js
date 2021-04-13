@@ -166,7 +166,6 @@ window.addEventListener('keydown', function(event) {
 		return;
 	}
 
-
 	switch(event.code) {
 		case "KeyS":
 		case "ArrowDown":
@@ -195,10 +194,6 @@ window.addEventListener('keydown', function(event) {
 
 	event.preventDefault();
 }, true);
-
-
-window.addEventListener("gamepadconnected", function(e) { gamepadHandler(e, true); }, false);
-window.addEventListener("gamepaddisconnected", function(e) { gamepadHandler(e, false); }, false);
 
 window.addEventListener('keyup', function(event) {
 	if (event.defaultPrevented || Object.keys(gamepads).length > 0) {
@@ -233,6 +228,21 @@ window.addEventListener('keyup', function(event) {
 
 	event.preventDefault();
 }, true);
+
+
+window.addEventListener("gamepadconnected", function(e) { gamepadHandler(e, true); }, false);
+window.addEventListener("gamepaddisconnected", function(e) { gamepadHandler(e, false); }, false);
+
+function checkGamepadInput() {
+	let pads = navigator.getGamepads ? navigator.getGamepads() :
+	(navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+	
+	keys["Up"] = (pads[0].axes[1] < -0.25 ? keys["Up"]+1 : 0);
+	keys["Down"] = (pads[0].axes[1] > 0.25) ? keys["Down"]+1 : 0;
+	keys["Left"] = (pads[0].axes[0] < -0.25 ? keys["Left"]+1 : 0);
+	keys["Right"] = (pads[0].axes[0] > 0.25 ? keys["Right"]+1 : 0);
+	keys["Jump"] = pads[0].buttons[0].pressed ? keys["Jump"]+1 : 0;
+}
 
 function init() {
 	canvas = document.getElementById('maincanvas');
@@ -313,16 +323,6 @@ function render() {
 	document.getElementById("present_counter").innerHTML = "現在のプレゼントは" + num_present + "個";
 }
 
-function checkGamepadInput() {
-	let pads = navigator.getGamepads ? navigator.getGamepads() :
-	(navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
-	
-	keys["Up"] = (pads[0].axes[1] < -0.25 ? keys["Up"]+1 : 0);
-	keys["Down"] = (pads[0].axes[1] > 0.25) ? keys["Down"]+1 : 0;
-	keys["Left"] = (pads[0].axes[0] < -0.25 ? keys["Left"]+1 : 0);
-	keys["Right"] = (pads[0].axes[0] > 0.25 ? keys["Right"]+1 : 0);
-	keys["Jump"] = pads[0].buttons[0].pressed ? keys["Jump"]+1 : 0;
-}
 function pointInTile(p) {
 	let mapx = Math.floor(p.x / TILE_SIZE);
 	let mapy = Math.floor(p.y / TILE_SIZE);
@@ -378,7 +378,6 @@ function checkTileCollision(chara) {
 	if (count >= 2) {
 		if ((check & 0x3) == 0x3) { // (0x1 | 0x2)
 			mov.y = Math.floor((pos.y+mov.y) / TILE_SIZE + 1)*TILE_SIZE - pos.y;
-			debugger;	
 			if (chara.accel.y < 0) {
 				chara.accel.y = -chara.accel.y * 0.3;
 			}
